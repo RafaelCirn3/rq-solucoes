@@ -1,0 +1,31 @@
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">RQ</div><div><strong>RQ SOLUÇÕES</strong><span>Soluções industriais</span></div></div>
+  <nav><a href="#portfolio">Representadas</a><a href="#portfolio">Produtos</a><a href="#solutions">Soluções</a><a href="#contact">Contato</a></nav>
+</header>
+
+<section class="hero"><div class="hero-copy">
+  <span class="eyebrow">AUTOMAÇÃO · INSTRUMENTAÇÃO · MANUTENÇÃO · EFICIÊNCIA</span>
+  <h1>As melhores marcas para a <em>sua indústria</em></h1>
+  <p>Produtos e soluções das principais fabricantes globais, com suporte técnico especializado da RQ Soluções.</p>
+  <a class="primary" href="#portfolio">Explorar catálogo</a>
+</div></section>
+
+<main>
+  <section class="search-panel" id="portfolio"><div><span class="eyebrow blue">CATÁLOGO TÉCNICO-COMERCIAL</span><h2>Nosso portfólio</h2><p>Cada linha apresenta uma empresa representada e seus principais produtos.</p></div>
+    <input type="search" placeholder="Buscar produto, marca ou aplicação..." [ngModel]="search()" (ngModelChange)="search.set($event)" />
+  </section>
+
+  <section class="company-row" *ngFor="let company of filteredCompanies()">
+    <aside class="company-card"><div class="company-logo">{{ company.name }}</div><p>{{ company.description }}</p><button>Ver todos os produtos →</button></aside>
+    <div class="products-grid"><article class="product-card" *ngFor="let product of company.products">
+      <img [src]="product.image" [alt]="product.name" />
+      <div class="product-body"><small>{{ product.category }}</small><h3>{{ product.name }}</h3><span>{{ product.model }}</span><p>{{ product.application }}</p><a [href]="whatsappLink(product)" target="_blank" rel="noopener">Solicitar no WhatsApp</a></div>
+    </article></div>
+  </section>
+
+  <section class="solutions" id="solutions"><span class="eyebrow blue">SOLUÇÕES RQ</span><h2>Suporte técnico para aplicações industriais</h2><div class="solutions-grid">
+    <div><strong>Automação Industrial</strong><p>Controle, produtividade e integração.</p></div><div><strong>Instrumentação</strong><p>Medições confiáveis e precisão operacional.</p></div><div><strong>Manutenção</strong><p>Disponibilidade e suporte técnico especializado.</p></div><div><strong>Eficiência Operacional</strong><p>Soluções orientadas a desempenho e resultado.</p></div>
+  </div></section>
+</main>
+
+<footer id="contact"><div><strong>RQ Soluções</strong><p>Indústria · Conexões · Resultados</p></div><p>Frontend demonstrativo V0 — dados de catálogo mockados.</p></footer>
