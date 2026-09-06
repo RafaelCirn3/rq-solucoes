@@ -1,31 +1,120 @@
+<a class="skip-link" href="#portfolio">Ir para o catálogo</a>
+
 <header class="topbar">
-  <div class="brand"><div class="brand-mark">RQ</div><div><strong>RQ SOLUÇÕES</strong><span>Soluções industriais</span></div></div>
-  <nav><a href="#portfolio">Representadas</a><a href="#portfolio">Produtos</a><a href="#solutions">Soluções</a><a href="#contact">Contato</a></nav>
+  <div class="shell topbar-inner">
+    <a class="brand" href="#top" aria-label="RQ Soluções - início">
+      <div class="brand-mark" aria-hidden="true">RQ</div>
+      <div>
+        <strong>RQ SOLUÇÕES</strong>
+        <span>Soluções industriais</span>
+      </div>
+    </a>
+
+    <nav aria-label="Navegação principal">
+      <a href="#portfolio">Representadas</a>
+      <a href="#portfolio">Produtos</a>
+      <a href="#solutions">Soluções</a>
+      <a href="#contact">Contato</a>
+    </nav>
+
+    <a class="header-cta" href="#portfolio">Solicitar cotação</a>
+  </div>
 </header>
 
-<section class="hero"><div class="hero-copy">
-  <span class="eyebrow">AUTOMAÇÃO · INSTRUMENTAÇÃO · MANUTENÇÃO · EFICIÊNCIA</span>
-  <h1>As melhores marcas para a <em>sua indústria</em></h1>
-  <p>Produtos e soluções das principais fabricantes globais, com suporte técnico especializado da RQ Soluções.</p>
-  <a class="primary" href="#portfolio">Explorar catálogo</a>
-</div></section>
+<section class="hero" id="top">
+  <div class="shell hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow">AUTOMAÇÃO · INSTRUMENTAÇÃO · MANUTENÇÃO · EFICIÊNCIA</span>
+      <h1>Produtos técnicos para <em>operações industriais</em></h1>
+      <p>Encontre soluções das empresas representadas pela RQ Soluções e solicite atendimento técnico diretamente para o produto de interesse.</p>
+      <div class="hero-actions">
+        <a class="primary" href="#portfolio">Explorar catálogo</a>
+        <a class="secondary" href="#solutions">Conhecer soluções</a>
+      </div>
+      <div class="hero-trust" aria-label="Diferenciais da RQ Soluções">
+        <span>Atendimento técnico</span>
+        <span>Catálogo por fabricante</span>
+        <span>Cotação direta</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <main>
-  <section class="search-panel" id="portfolio"><div><span class="eyebrow blue">CATÁLOGO TÉCNICO-COMERCIAL</span><h2>Nosso portfólio</h2><p>Cada linha apresenta uma empresa representada e seus principais produtos.</p></div>
-    <input type="search" placeholder="Buscar produto, marca ou aplicação..." [ngModel]="search()" (ngModelChange)="search.set($event)" />
+  <section class="catalog-intro" id="portfolio">
+    <div class="shell catalog-intro-inner">
+      <div class="section-copy">
+        <span class="eyebrow blue">CATÁLOGO TÉCNICO-COMERCIAL</span>
+        <h2>Produtos organizados por empresa</h2>
+        <p>Cada linha representa uma fabricante e reúne seus principais produtos para consulta e solicitação comercial.</p>
+      </div>
+
+      <div class="search-field">
+        <label for="catalog-search">Buscar no catálogo</label>
+        <div class="search-control">
+          <span aria-hidden="true">⌕</span>
+          <input id="catalog-search" type="search" placeholder="Produto, marca, modelo ou aplicação" [ngModel]="search()" (ngModelChange)="search.set($event)" />
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="company-row" *ngFor="let company of filteredCompanies()">
-    <aside class="company-card"><div class="company-logo">{{ company.name }}</div><p>{{ company.description }}</p><button>Ver todos os produtos →</button></aside>
-    <div class="products-grid"><article class="product-card" *ngFor="let product of company.products">
-      <img [src]="product.image" [alt]="product.name" />
-      <div class="product-body"><small>{{ product.category }}</small><h3>{{ product.name }}</h3><span>{{ product.model }}</span><p>{{ product.application }}</p><a [href]="whatsappLink(product)" target="_blank" rel="noopener">Solicitar no WhatsApp</a></div>
-    </article></div>
+  <section class="catalog-shell shell" aria-label="Empresas e produtos">
+    <section class="company-row" *ngFor="let company of filteredCompanies()">
+      <aside class="company-card">
+        <div class="company-logo">{{ company.name }}</div>
+        <p>{{ company.description }}</p>
+        <a href="#portfolio">Ver portfólio da empresa</a>
+      </aside>
+
+      <div class="products-grid">
+        <article class="product-card" *ngFor="let product of company.products">
+          <div class="product-media">
+            <img [src]="product.image" [alt]="product.name + ' - ' + product.model" loading="lazy" />
+          </div>
+          <div class="product-body">
+            <div class="product-meta">
+              <span class="category">{{ product.category }}</span>
+              <span class="model">{{ product.model }}</span>
+            </div>
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.application }}</p>
+            <a class="quote-link" [href]="whatsappLink(product)" target="_blank" rel="noopener noreferrer">Solicitar cotação <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="empty-state" *ngIf="filteredCompanies().length === 0">
+      <strong>Nenhum produto encontrado.</strong>
+      <p>Tente buscar por outro fabricante, modelo, categoria ou aplicação.</p>
+    </div>
   </section>
 
-  <section class="solutions" id="solutions"><span class="eyebrow blue">SOLUÇÕES RQ</span><h2>Suporte técnico para aplicações industriais</h2><div class="solutions-grid">
-    <div><strong>Automação Industrial</strong><p>Controle, produtividade e integração.</p></div><div><strong>Instrumentação</strong><p>Medições confiáveis e precisão operacional.</p></div><div><strong>Manutenção</strong><p>Disponibilidade e suporte técnico especializado.</p></div><div><strong>Eficiência Operacional</strong><p>Soluções orientadas a desempenho e resultado.</p></div>
-  </div></section>
+  <section class="solutions" id="solutions">
+    <div class="shell">
+      <span class="eyebrow blue">SOLUÇÕES RQ</span>
+      <h2>Suporte técnico em todo o ciclo industrial</h2>
+      <p class="solutions-lead">O catálogo conecta a necessidade de compra aos serviços técnicos que sustentam a aplicação correta de cada solução.</p>
+      <div class="solutions-grid">
+        <article><span>01</span><strong>Automação Industrial</strong><p>Controle, produtividade e integração de processos.</p></article>
+        <article><span>02</span><strong>Instrumentação</strong><p>Medições confiáveis e precisão operacional.</p></article>
+        <article><span>03</span><strong>Manutenção</strong><p>Disponibilidade e suporte técnico especializado.</p></article>
+        <article><span>04</span><strong>Eficiência Operacional</strong><p>Soluções orientadas a desempenho e resultado.</p></article>
+      </div>
+    </div>
+  </section>
 </main>
 
-<footer id="contact"><div><strong>RQ Soluções</strong><p>Indústria · Conexões · Resultados</p></div><p>Frontend demonstrativo V0 — dados de catálogo mockados.</p></footer>
+<footer id="contact">
+  <div class="shell footer-inner">
+    <div>
+      <strong>RQ Soluções</strong>
+      <p>Indústria · Conexões · Resultados</p>
+    </div>
+    <div class="footer-note">
+      <span>Demonstração V0</span>
+      <p>Dados de catálogo e imagens ainda são mockados para validação da interface.</p>
+    </div>
+  </div>
+</footer>
