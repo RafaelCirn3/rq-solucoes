@@ -14,22 +14,22 @@ Cloudflare
 
 ## Princípios
 
-- Produto como entidade central.
+- `Product` é a entidade central do domínio.
 - Catálogo técnico-comercial, sem carrinho, checkout ou estoque na V0.
 - Frontend desacoplado da API.
 - Backend modularizado por domínio.
-- SEO, desempenho e conversão como requisitos arquiteturais.
+- SEO, desempenho e conversão são requisitos arquiteturais.
 - Sem microserviços, Kubernetes, Redis ou Celery até existir necessidade real.
 
-## Domínios previstos
+## Domínios implementados como fundação
 
-- companies
-- catalog
-- categories
-- applications
-- documents
-- leads
+- `companies`: fabricantes/representadas.
+- `categories`: classificação comercial/técnica.
+- `applications`: aplicações industriais.
+- `catalog`: produtos, imagens e especificações.
+- `documents`: datasheets, manuais, catálogos, certificados e desenhos.
+- `leads`: base para rastreamento comercial e UTMs.
 
 ## V0
 
-O frontend usa dados mockados locais. O backend existe apenas como fundação e não é consumido pelo frontend nesta versão.
+O frontend utiliza dados mockados locais e não consome a API. Os modelos do backend definem desde já o contrato conceitual que será exposto via DRF na V1.
